@@ -6,13 +6,15 @@
     "@material-ui/core": "^4.4.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.2"
+    "react-scripts": "3.1.2",
+    "serve": "^11.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve:build": "serve -l 3000 ./build"
   },
   "eslintConfig": {
     "extends": "react-app"
