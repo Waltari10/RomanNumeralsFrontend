@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
 import './App.css';
+import { romanToArabic } from './helpers'
 
 function App() {
+  const [roman, setRoman] = useState(0);
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+     <Typography
+      variant="h6"
+    >Enter roman numerals here</Typography>
+      <Input
+        onChange={(e) => setRoman(e.target.value)}
+        value={roman}
+     />
+     <Typography
+      variant="body1"
+    >{romanToArabic(roman)}</Typography>
     </div>
   );
 }
