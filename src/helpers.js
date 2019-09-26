@@ -15,7 +15,7 @@ const romanNumeralValues = {
     CD: 400,
     D: 500,
     M: 1000,
-}
+};
 
 
 
@@ -32,11 +32,11 @@ const romanNumeralValues = {
 const isValidRoman = (romanNumeral) => {
     
     if (!romanNumeral) {
-        return { isValid: false, error: 'Falsy value given'}
+        return { isValid: false, error: 'Falsy value given'};
     }
 
     if (typeof romanNumeral !== 'string') {
-        return { isValid: false, error: 'Given value is not a string'}
+        return { isValid: false, error: 'Given value is not a string'};
     }
 
 
@@ -51,18 +51,18 @@ const isValidRoman = (romanNumeral) => {
         'b',
         'd'
         /* TODO: Add all illegal characters. Regexp would be best. Or maybe allowed characters? */
-    ]
+    ];
 
-    const illegalCombination = illegalCombinations.find(combination => romanNumeral.indexOf(combination) !== -1)
+    const illegalCombination = illegalCombinations.find(combination => romanNumeral.indexOf(combination) !== -1);
     
     if (illegalCombination) {
-        return { isValid: false, error: 'Has illegal combination: ' + illegalCombination }
+        return { isValid: false, error: 'Has illegal combination: ' + illegalCombination };
     }
 
 
     /* i is here just in case to prevent infinite loops... Looks a bit stinky, I admit.  */
     let i = 0;
-    let isValid = true
+    let isValid = true;
 
     let romanNumeralTemp = romanNumeral;
 
@@ -76,19 +76,19 @@ const isValidRoman = (romanNumeral) => {
         const followingRoman = getNextRomanNumeral(romanNumeralTemp);
 
         if (romanNumeralValues[firstRoman] < romanNumeralValues[followingRoman]) {
-            return { isValid: false, error: 'Greater values should not follow lesser values' }
+            return { isValid: false, error: 'Greater values should not follow lesser values' };
         } 
 
         
         if (firstRoman === followingRoman && firstRoman.length === 2 && followingRoman.length === 2) {
-            return { isValid: false, error: 'Has two same roman abbreviations following each other: ' + firstRoman }
+            return { isValid: false, error: 'Has two same roman abbreviations following each other: ' + firstRoman };
         }
     }
 
 
 
-    return { isValid: true }
-}
+    return { isValid: true };
+};
 
 const getNextRomanNumeral = (romanNumeral) => {
     return Object.keys(romanNumeralValues).reduce((prev, key) => {
@@ -96,19 +96,19 @@ const getNextRomanNumeral = (romanNumeral) => {
 
         // We can always use the latter match.
         if (romanNumeral.toUpperCase().indexOf(key) === 0) {
-          return key
+          return key;
         }
 
         return prev;
       
       
       }, '');
-}
+};
 
 
 export const romanToArabic = (romanNumeral) => {
 
-    const { error, isValid } = isValidRoman(romanNumeral)
+    const { error, isValid } = isValidRoman(romanNumeral);
 
     if (!isValid) {
         return error;
@@ -144,4 +144,4 @@ export const romanToArabic = (romanNumeral) => {
     }
 
     return arabicValAccumulator;
-} 
+}; 
