@@ -47,11 +47,8 @@ const isValidRoman = (romanNumeral) => {
         'IIII',
         'XXXX',
         'CCCC',
-        'a',
-        'b',
-        'd'
-        /* TODO: Add all illegal characters. Regexp would be best. Or maybe allowed characters? */
     ];
+
 
     const illegalCombination = illegalCombinations.find(combination => romanNumeral.indexOf(combination) !== -1);
     
@@ -59,8 +56,16 @@ const isValidRoman = (romanNumeral) => {
         return { isValid: false, error: 'Has illegal combination: ' + illegalCombination };
     }
 
+    const illegalCharacterRegexp = /[1-9abdefghjknopqrstuyzöäå!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
 
-    /* i is here just in case to prevent infinite loops... Looks a bit stinky, I admit.  */
+    const illegalCharMatch = romanNumeral.match(illegalCharacterRegexp);
+
+    if (illegalCharMatch) {
+        return { isValid: false, error: 'Contains illegal character: ' + [illegalCharMatch[0]] };
+    }
+
+
+    /* i is here just in case to prevent infinite loops... Might there be a more elegant solution?  */
     let i = 0;
     let isValid = true;
 
@@ -119,7 +124,7 @@ export const romanToArabic = (romanNumeral) => {
 
     let romanNumeralTemp = romanNumeral;
 
-    /* i is here just in case to prevent infinite loops... Looks a bit stinky, I admit.  */
+    /* i is here just in case to prevent infinite loops... Might there be a more elegant solution?  */
     let i = 0;
 
     while (romanNumeralTemp.length > 0 && i < 100){
@@ -132,7 +137,6 @@ export const romanToArabic = (romanNumeral) => {
         const followingRoman = getNextRomanNumeral(romanNumeralTemp);
 
         // If roman numeral is smaller than the following numeral then reduce, otherwise add.
-
 
         const arabicValueTemp = romanNumeralValues[firstRoman] || 0;
 
