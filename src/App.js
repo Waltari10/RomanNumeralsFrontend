@@ -5,7 +5,7 @@ import './App.css';
 import { romanToArabic } from './helpers'
 
 function App() {
-  const [roman, setRoman] = useState(0);
+  const [roman, setRoman] = useState();
 
   
   return (
